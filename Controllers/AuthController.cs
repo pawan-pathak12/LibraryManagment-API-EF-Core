@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using AutoMapper;
 
 
 namespace Library_Management_API.Controllers
@@ -19,11 +20,13 @@ namespace Library_Management_API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ApplicationDbContext _applicationDbContext;
+        private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
 
-        public AuthController(ApplicationDbContext applicationDbContext, IConfiguration configuration)
+        public AuthController(ApplicationDbContext applicationDbContext,IMapper mapper, IConfiguration configuration)
         {
             this._applicationDbContext = applicationDbContext;
+            this._mapper = mapper;
             this._configuration = configuration;
         }
         [HttpPost("register")]

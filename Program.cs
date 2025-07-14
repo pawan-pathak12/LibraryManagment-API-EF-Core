@@ -28,6 +28,7 @@ builder.Services.AddAuthentication("Bearer")
         };
 
     });
+builder.Services.AddAutoMapper(typeof(Program)); // Register AutoMapper
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
