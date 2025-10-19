@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Library_Management_API.DTOs.Update
+namespace Library_Management_API.DTOs.Category
 {
     public class UpdateCategoryDTO
     {

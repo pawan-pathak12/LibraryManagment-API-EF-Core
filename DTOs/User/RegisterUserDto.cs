@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace Library_Management_API.DTOs
+namespace Library_Management_API.DTOs.User
 {
     public class RegisterUserDto
     {

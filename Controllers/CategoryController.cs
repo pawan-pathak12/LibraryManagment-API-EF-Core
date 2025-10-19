@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Library_Management_API.Data;
-using Library_Management_API.DTOs;
-using Library_Management_API.DTOs.Update;
+using Library_Management_API.DTOs.Category;
 using Library_Management_API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

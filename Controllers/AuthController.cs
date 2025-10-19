@@ -1,6 +1,5 @@
 ﻿using Library_Management_API.Data;
 using Library_Management_API.Models;
-using Library_Management_API.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +9,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using AutoMapper;
+using Library_Management_API.DTOs.User;
 
 
 namespace Library_Management_API.Controllers

@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 //add connection to database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("MyCon")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 //JWT token
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
