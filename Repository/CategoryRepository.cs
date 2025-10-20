@@ -15,7 +15,7 @@ namespace Library_Management_API.Repository
             _dbContext = dbContext;
             _logger = logger;
         }
-        
+
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
             return await _dbContext.Categories.ToListAsync();
@@ -28,9 +28,9 @@ namespace Library_Management_API.Repository
 
         public async Task<int> AddAsync(Category category)
         {
-              _dbContext.Categories.Add(category);
-              await _dbContext.SaveChangesAsync();
-              return category.Id; 
+            _dbContext.Categories.Add(category);
+            await _dbContext.SaveChangesAsync();
+            return category.Id;
 
         }
 
@@ -40,15 +40,15 @@ namespace Library_Management_API.Repository
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task   DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
             var category = await _dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
-            if (category==null)
+            if (category == null)
             {
                 _logger.LogWarning($"Their is no category with Id {id}");
-                _dbContext.Categories.Remove(category);
-                await _dbContext.SaveChangesAsync();
             }
+            _dbContext.Categories.Remove(category);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
