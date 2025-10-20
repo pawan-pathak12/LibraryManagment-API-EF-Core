@@ -3,6 +3,8 @@ using Library_Management_API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Library_Management_API.Interface;
+using Library_Management_API.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +16,8 @@ builder.Services.AddSwaggerGen();
 //add connection to database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-//JWT token
+
+#region JWT token
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
@@ -28,7 +31,18 @@ builder.Services.AddAuthentication("Bearer")
         };
 
     });
+
+#endregion
+
 builder.Services.AddAutoMapper(typeof(Program)); // Register AutoMapper
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+
+builder.Logging.ClearProviders(); // removes default providers if you want custom ones
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

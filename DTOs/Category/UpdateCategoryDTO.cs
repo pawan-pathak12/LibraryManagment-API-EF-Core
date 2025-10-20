@@ -6,7 +6,8 @@ namespace Library_Management_API.DTOs.Category
     {
         [Required]
         public string Name { get; set; }
-        public string Description { get; set; }
+
+     public int Id { get; set; }
        
     }
 }

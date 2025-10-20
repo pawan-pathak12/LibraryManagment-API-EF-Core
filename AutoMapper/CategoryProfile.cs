@@ -10,7 +10,7 @@ namespace Library_Management_API.AutoMapper
         {
             CreateMap<Category, CreateCategoryDto>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
-
+            CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
         }
     }
 }

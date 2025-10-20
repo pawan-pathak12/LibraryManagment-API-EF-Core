@@ -8,9 +8,9 @@ namespace Library_Management_API.Repository
     public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly Logger<CategoryRepository> _logger;
+        private readonly ILogger<CategoryRepository> _logger;
 
-        public CategoryRepository(ApplicationDbContext dbContext, Logger<CategoryRepository> logger)
+        public CategoryRepository(ApplicationDbContext dbContext, ILogger<CategoryRepository> logger)
         {
             _dbContext = dbContext;
             _logger = logger;

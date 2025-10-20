@@ -8,9 +8,9 @@ namespace Library_Management_API.Repository;
 public class BookRepository:IBookRepository
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly Logger<BookRepository> _logger;
+    private readonly ILogger<BookRepository> _logger;
 
-    public BookRepository(ApplicationDbContext dbContext,Logger<BookRepository> logger)
+    public BookRepository(ApplicationDbContext dbContext,ILogger<BookRepository> logger)
     {
         _dbContext = dbContext;
         _logger = logger;
