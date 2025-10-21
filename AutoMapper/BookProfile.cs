@@ -2,14 +2,14 @@
 using Library_Management_API.DTOs.Book;
 using Library_Management_API.Models;
 
-namespace Library_Management_API.AutoMapper
+namespace Library_Management_API.AutoMapper;
+
+public class BookProfile : Profile
 {
-    public class BookProfile : Profile
+    public BookProfile()
     {
-        public BookProfile()
-        {
-            CreateMap<CreateBookDto, Book>().ReverseMap();
-            CreateMap<BookDto, Book>().ReverseMap();
-        }
+        CreateMap<CreateBookDto, Book>().ReverseMap();
+        CreateMap<BookDto, Book>().ReverseMap();
+        CreateMap<Book, UpdateBookDto>().ReverseMap();
     }
 }

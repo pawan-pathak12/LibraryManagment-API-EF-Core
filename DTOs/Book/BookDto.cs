@@ -6,7 +6,7 @@
         public string Title { get; set; }
         public string Author { get; set; }
         public DateOnly PublishedDate { get; set; }
-
         public string CategoryName { get; set; }
+        public int CategoryId { get; set; }
     }
 }

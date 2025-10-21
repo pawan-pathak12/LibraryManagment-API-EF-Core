@@ -2,8 +2,10 @@
 
 namespace Library_Management_API.DTOs.Book;
 
-public class CreateBookDto
+public class UpdateBookDto
 {
+    public int Id { get; set; }
+
     [Required] [MaxLength(100)] public string Title { get; set; }
 
     [Required] public string Author { get; set; }
