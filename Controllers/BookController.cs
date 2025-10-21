@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Library_Management_API.Data;
 using Library_Management_API.DTOs.Book;
 using Library_Management_API.Interface;
 using Library_Management_API.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library_Management_API.Controllers;
@@ -11,12 +13,14 @@ namespace Library_Management_API.Controllers;
 public class BookController : ControllerBase
 {
     private readonly IBookRepository _bookRepository;
+    private readonly ApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public BookController(IBookRepository bookRepository, IMapper mapper)
+    public BookController(IBookRepository bookRepository, IMapper mapper, ApplicationDbContext context)
     {
         _bookRepository = bookRepository;
         _mapper = mapper;
+        _context = context;
     }
 
     [HttpPost]
@@ -54,6 +58,19 @@ public class BookController : ControllerBase
 
         await _bookRepository.DeleteAsync(id);
         return Ok($"Book with id {id} is deleted successfully");
+    }
+
+    #endregion
+
+    #region httpPatch
+
+    //wdm
+
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> UpdatePatchBook([FromRoute] int id, [FromBody] JsonPatchDocument bookModel)
+    {
+        await _bookRepository.UpdatePatchAsync(id, bookModel);
+        return Ok("Updated is successfully");
     }
 
     #endregion

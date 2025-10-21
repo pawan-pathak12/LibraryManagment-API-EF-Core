@@ -1,16 +1,16 @@
 
 using Library_Management_API.Data;
+using Library_Management_API.Interface;
+using Library_Management_API.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Library_Management_API.Interface;
-using Library_Management_API.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddSwaggerGen();
 //add connection to database

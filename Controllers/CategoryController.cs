@@ -1,73 +1,71 @@
-﻿using System.Runtime.CompilerServices;
-using AutoMapper;
-using Library_Management_API.Data;
+﻿using AutoMapper;
 using Library_Management_API.DTOs.Category;
 using Library_Management_API.Interface;
 using Library_Management_API.Models;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace Library_Management_API.Controllers
+namespace Library_Management_API.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class CategoryController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CategoryController : ControllerBase
+    private readonly ICategoryRepository _categoryRepository;
+    private readonly IMapper _mapper;
+
+    public CategoryController(ICategoryRepository categoryRepository, IMapper mapper)
     {
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IMapper _mapper;
+        _categoryRepository = categoryRepository;
+        _mapper = mapper;
+    }
 
-        public CategoryController(ICategoryRepository categoryRepository , IMapper mapper)
-        {
-            _categoryRepository = categoryRepository;
-            this._mapper = mapper;
-        }
+    [HttpPost]
+    public async Task<IActionResult> AddAsync([FromBody] CreateCategoryDto createCategory)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        [HttpPost]
-        public async Task<IActionResult> AddAsync([FromBody] CreateCategoryDto createCategory)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        var category = _mapper.Map<Category>(createCategory);
+        var created = await _categoryRepository.AddAsync(category);
+        return Ok(category);
+    }
 
-            var category = _mapper.Map<Category>(createCategory);
-            var created = await _categoryRepository.AddAsync(category);
-            return Ok(category);
-        }
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var category = await _categoryRepository.GetAllAsync();
+        return Ok(category);
+    }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-         var category=   await _categoryRepository.GetAllAsync();
-         return Ok(category);
-        }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var category = await _categoryRepository.GetByIdAsync(id);
+        return Ok(category);
+    }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var category = await _categoryRepository.GetByIdAsync(id);
-            return Ok(category);
-        }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateCategoryDTO updateCategory)
+    {
+        if (id != updateCategory.Id)
+            return BadRequest("ID mismatch");
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateCategoryDTO updateCategory)
-        {
-            if (id != updateCategory.Id)
-                return BadRequest("ID mismatch");
+        var category = _mapper.Map<Category>(updateCategory);
+        await _categoryRepository.UpdateAsync(category);
+        return Ok($"Category with Id {category.Id} Updated Successfully");
+    }
 
-            var category = _mapper.Map<Category>(updateCategory);
-            await _categoryRepository.UpdateAsync(category);
-            return Ok($"Category with Id {category.Id} Updated Successfully");
-        }
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> UpdatePatch([FromRoute] int id, [FromBody] JsonPatchDocument categoryModel)
+    {
+        await _categoryRepository.UpdatePatchAsync(id, categoryModel);
+        return Ok("Updated Successfully");
+    }
 
-
-        [HttpDelete("id")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await _categoryRepository.DeleteAsync(id);
-            return Ok($"Deleted category with Id {id}");
-        }
+    [HttpDelete("id")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await _categoryRepository.DeleteAsync(id);
+        return Ok($"Deleted category with Id {id}");
     }
 }
