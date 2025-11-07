@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Library_Management_API.Models
+﻿namespace Library_Management_API.Models
 {
     public class Book
     {
@@ -8,8 +6,12 @@ namespace Library_Management_API.Models
         public string Title { get; set; }
         public string Author { get; set; }
         public DateOnly PublishedDate { get; set; }
-        public int CategoryId { get; set; } 
+        public int CategoryId { get; set; }
         public Category Category { get; set; }
 
+        public ICollection<Author> Authors { get; set; }
+        public int PublisherId { get; set; }
+        public Publisher Publisher { get; set; }
     }
+}
 }
