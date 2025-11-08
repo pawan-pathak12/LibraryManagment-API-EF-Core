@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Library_Management_API.Data;
-using Library_Management_API.DTOs.Book;
+using Library_Management_API.DTOs.Books;
 using Library_Management_API.Interface;
 using Library_Management_API.Models;
 using Microsoft.AspNetCore.JsonPatch;

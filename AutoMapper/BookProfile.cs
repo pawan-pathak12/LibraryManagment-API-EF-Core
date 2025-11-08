@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Library_Management_API.DTOs.Book;
+using Library_Management_API.DTOs.Books;
 using Library_Management_API.Models;
 
 namespace Library_Management_API.AutoMapper;

@@ -1,4 +1,6 @@
-﻿namespace Library_Management_API.DTOs.Authors
+﻿using Library_Management_API.Models;
+
+namespace Library_Management_API.DTOs.Authors
 {
     public class AuthorDto
     {

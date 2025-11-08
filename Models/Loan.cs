@@ -1,6 +1,4 @@
-﻿using Library_Management_API.Models.Enum;
-
-namespace Library_Management_API.Models
+﻿namespace Library_Management_API.Models
 {
     public class Loan
     {
@@ -14,7 +12,7 @@ namespace Library_Management_API.Models
         public DateTime IssuedDate { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime? ReturnedDate { get; set; }
-        public LoanStatus Status { get; set; } // Issued, Returned, Overdue
+        public int Status { get; set; } // Issued, Returned, Overdue
     }
 }
 

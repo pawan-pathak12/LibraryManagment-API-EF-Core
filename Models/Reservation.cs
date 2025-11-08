@@ -1,6 +1,4 @@
-﻿using Library_Management_API.Models.Enum;
-
-namespace Library_Management_API.Models
+﻿namespace Library_Management_API.Models
 {
     public class Reservation
     {
@@ -12,7 +10,7 @@ namespace Library_Management_API.Models
         public Member Member { get; set; }
 
         public DateTime ReservationDate { get; set; }
-        public ReservationStatus Status { get; set; } // Pending, Fulfilled, Cancelled
+        public int Status { get; set; } // Pending, Fulfilled, Cancelled
     }
 }
 
