@@ -1,15 +1,12 @@
 ﻿using Library_Management_API.Models.Enum;
 
-namespace Library_Management_API.Models
+namespace Library_Management_API.DTOs.Loans
 {
-    public class Loan
+    public class CreateLoanDto
     {
-        public int LoanId { get; set; }
         public int BookId { get; set; }
-        public Book Book { get; set; }
 
         public int MemberId { get; set; }
-        public Member Member { get; set; }
 
         public DateTime IssuedDate { get; set; }
         public DateTime DueDate { get; set; }
@@ -17,4 +14,3 @@ namespace Library_Management_API.Models
         public LoanStatus Status { get; set; } // Issued, Returned, Overdue
     }
 }
-

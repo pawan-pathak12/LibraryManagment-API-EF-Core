@@ -1,8 +1,9 @@
-﻿using Library_Management_API.Models.Enum;
+﻿using Library_Management_API.Models;
+using Library_Management_API.Models.Enum;
 
-namespace Library_Management_API.Models
+namespace Library_Management_API.DTOs.Loans
 {
-    public class Loan
+    public class LoanDto
     {
         public int LoanId { get; set; }
         public int BookId { get; set; }
@@ -17,4 +18,3 @@ namespace Library_Management_API.Models
         public LoanStatus Status { get; set; } // Issued, Returned, Overdue
     }
 }
-

@@ -1,4 +1,4 @@
-﻿namespace Library_Management_API.DTOs.Book
+﻿namespace Library_Management_API.DTOs.Books
 {
     public class BookDto
     {
@@ -8,5 +8,6 @@
         public DateOnly PublishedDate { get; set; }
         public string CategoryName { get; set; }
         public int CategoryId { get; set; }
+
     }
 }
