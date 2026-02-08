@@ -1,20 +1,18 @@
-﻿using Library_Management_API.Data;
+﻿using AutoMapper;
+using Library_Management_API.Data;
+using Library_Management_API.DTOs.User;
 using Library_Management_API.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using AutoMapper;
-using Library_Management_API.DTOs.User;
+using System.Text;
 
 
 namespace Library_Management_API.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -23,7 +21,7 @@ namespace Library_Management_API.Controllers
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
 
-        public AuthController(ApplicationDbContext applicationDbContext,IMapper mapper, IConfiguration configuration)
+        public AuthController(ApplicationDbContext applicationDbContext, IMapper mapper, IConfiguration configuration)
         {
             this._applicationDbContext = applicationDbContext;
             this._mapper = mapper;
@@ -98,7 +96,7 @@ namespace Library_Management_API.Controllers
             };
             var token = tokenhandler.CreateToken(tokenDescriptor);
             var jwt = tokenhandler.WriteToken(token);
-            return Ok(new {token =jwt});
+            return Ok(new { token = jwt });
         }
     }
 }
