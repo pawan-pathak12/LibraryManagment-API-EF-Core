@@ -40,6 +40,7 @@ builder.Services.AddAutoMapper(typeof(Program)); // Register AutoMapper
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 
 builder.Logging.ClearProviders(); // removes default providers if you want custom ones
 builder.Logging.AddConsole();
@@ -53,8 +54,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseMiddleware<GlobalExceptionMiddleware>();
+
+
+
 app.UseMiddleware<RequestLoggingMiddleware>();
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

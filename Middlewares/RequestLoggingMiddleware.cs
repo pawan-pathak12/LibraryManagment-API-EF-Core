@@ -16,23 +16,25 @@
         {
             var startTime = DateTime.UtcNow;
 
+            // 1️⃣ Log request
             _logger.LogInformation(
-               "Request started: {Method} {Path}",
-               context.Request.Method,
-               context.Request.Path
-           );
-
-            await _next(context);   // controller execute here
-
-
-            var duration = DateTime.UtcNow - startTime;
-
-
-            _logger.LogInformation(
-                "Request finished in {Duration} ms",
-                duration.TotalMilliseconds
+                "Request started: {Method} {Path}",
+                context.Request.Method,
+                context.Request.Path
             );
 
+            await _next(context); // controller runs here
+
+            // 2️⃣ Log response
+            var duration = DateTime.UtcNow - startTime;
+
+            _logger.LogInformation(
+                "Request finished: {Method} {Path} | Status: {StatusCode} | Time: {Duration}ms",
+                context.Request.Method,
+                context.Request.Path,
+                context.Response.StatusCode,
+                duration.TotalMilliseconds
+            );
         }
 
     }
