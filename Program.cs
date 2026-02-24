@@ -1,8 +1,9 @@
 
-using Library_Management_API.Data;
-using Library_Management_API.Interface;
-using Library_Management_API.Middlewares;
-using Library_Management_API.Repository;
+using Library_Management_API.API.Middlewares;
+using Library_Management_API.Application.Interface;
+using Library_Management_API.Infrastructure.Data;
+using Library_Management_API.Infrastructure.Repository;
+using Library_Management_API.Infrastructure.Repository.Books;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -13,8 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddSwaggerGen();
+
 //add connection to database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -39,10 +40,13 @@ builder.Services.AddAuthentication("Bearer")
 builder.Services.AddAutoMapper(typeof(Program)); // Register AutoMapper
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 
-builder.Logging.ClearProviders(); // removes default providers if you want custom ones
+builder.Services.AddScoped<IBookCommandRepository, BookCommandRepository>();
+builder.Services.AddScoped<IBookQueryRepository, BookQueryRepository>();
+
+
+builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 
@@ -54,7 +58,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 
 
 app.UseMiddleware<RequestLoggingMiddleware>();

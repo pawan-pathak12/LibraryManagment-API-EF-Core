@@ -25,8 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\IService\" />
-    <Folder Include="Services\" />
+    <Folder Include="Application\Books\Queries\" />
+    <Folder Include="Application\Books\Commands\" />
+    <Folder Include="Application\Interface\IService\" />
   </ItemGroup>
 
 </Project>
